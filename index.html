@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>День рождения Димончика — 31 мая</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: #0a0a0f; color: #fff;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh; overflow-x: hidden;
+  }
+  .bg-blobs { position:fixed; inset:0; z-index:0; overflow:hidden; }
+  .blob {
+    position:absolute; border-radius:50%;
+    filter:blur(80px); opacity:0.35;
+    animation:float 8s ease-in-out infinite;
+  }
+  .b1{width:500px;height:500px;background:#ff3c6f;top:-100px;left:-100px;animation-delay:0s}
+  .b2{width:400px;height:400px;background:#7c3aed;top:30%;right:-100px;animation-delay:-3s}
+  .b3{width:350px;height:350px;background:#0ea5e9;bottom:-100px;left:20%;animation-delay:-5s}
+  .b4{width:300px;height:300px;background:#f59e0b;bottom:10%;right:10%;animation-delay:-2s}
+  @keyframes float {
+    0%,100%{transform:translate(0,0) scale(1)}
+    33%{transform:translate(30px,-30px) scale(1.05)}
+    66%{transform:translate(-20px,20px) scale(0.95)}
+  }
+  .page {
+    position:relative; z-index:1;
+    max-width:680px; margin:0 auto;
+    padding:40px 20px 60px;
+  }
+  .card {
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:32px; padding:48px 40px;
+    backdrop-filter:blur(20px);
+    animation:fadeUp 0.8s ease both;
+  }
+  @keyframes fadeUp {
+    from{opacity:0;transform:translateY(40px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .eyebrow {
+    font-size:11px; font-weight:500;
+    letter-spacing:0.2em; text-transform:uppercase;
+    color:#f59e0b; margin-bottom:16px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before,.eyebrow::after{content:'';height:1px;flex:1;background:rgba(245,158,11,0.3)}
+  .hero-title {
+    font-family:'Unbounded',sans-serif;
+    font-size:clamp(32px,8vw,58px);
+    font-weight:900; line-height:1.05;
+    letter-spacing:-0.02em;
+    background:linear-gradient(135deg,#fff 0%,#ff3c6f 50%,#f59e0b 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text; margin-bottom:8px;
+  }
+  .hero-sub {
+    font-family:'Unbounded',sans-serif;
+    font-size:clamp(12px,2.5vw,16px); font-weight:400;
+    color:rgba(255,255,255,0.4); letter-spacing:0.04em;
+    margin-bottom:40px;
+  }
+  .divider {
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);
+    margin:36px 0;
+  }
+  .details-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  .detail-item {
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:20px; padding:20px 22px;
+    transition:background 0.2s;
+  }
+  .detail-item:hover{background:rgba(255,255,255,0.1)}
+  .detail-label{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:6px}
+  .detail-value{font-size:15px;font-weight:500;color:#fff;line-height:1.4}
+  .detail-accent{color:#ff3c6f}
+  .map-box{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:20px;overflow:hidden;margin-bottom:16px}
+  .map-box iframe{width:100%;height:200px;display:block;border:none;filter:saturate(0.6) brightness(0.7)}
+  .map-footer{padding:14px 22px;display:flex;align-items:center;gap:10px}
+  .map-pin{width:28px;height:28px;background:#ff3c6f;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+  .map-address{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.4}
+  .dress-box {
+    background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(255,60,111,0.15));
+    border:1px solid rgba(124,58,237,0.4);
+    border-radius:20px; padding:22px 26px; margin-bottom:16px;
+    display:flex; gap:16px; align-items:flex-start;
+  }
+  .dress-icons{font-size:28px;line-height:1;flex-shrink:0}
+  .dress-title{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#a78bfa;margin-bottom:6px}
+  .dress-desc{font-size:14px;color:rgba(255,255,255,0.75);line-height:1.6}
+  .dress-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .tag{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:4px 12px;font-size:12px;color:rgba(255,255,255,0.7)}
+  .bar-section {
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:20px; padding:24px 26px; margin-bottom:36px;
+  }
+  .bar-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .bar-icon{font-size:26px}
+  .bar-label{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#0ea5e9;margin-bottom:3px}
+  .bar-subdesc{font-size:13px;color:rgba(255,255,255,0.5)}
+  .bar-textarea {
+    width:100%;
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:14px; padding:14px 16px;
+    color:#fff; font-family:'Inter',sans-serif;
+    font-size:14px; line-height:1.6;
+    resize:vertical; min-height:90px;
+    outline:none; transition:border-color 0.2s;
+  }
+  .bar-textarea::placeholder{color:rgba(255,255,255,0.25)}
+  .bar-textarea:focus{border-color:rgba(14,165,233,0.5)}
+  .bar-footer{display:flex;justify-content:flex-end;margin-top:10px}
+  .bar-send-btn {
+    background:rgba(14,165,233,0.2);
+    border:1px solid rgba(14,165,233,0.4);
+    border-radius:100px; padding:8px 20px;
+    color:#7dd3fc; font-family:'Inter',sans-serif;
+    font-size:13px; font-weight:500; cursor:pointer;
+    transition:background 0.2s, transform 0.15s;
+  }
+  .bar-send-btn:hover{background:rgba(14,165,233,0.3);transform:scale(1.03)}
+  .bar-send-btn:active{transform:scale(0.97)}
+  .bar-wishes-list{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+  .wish-item {
+    background:rgba(14,165,233,0.08);
+    border:1px solid rgba(14,165,233,0.2);
+    border-radius:12px; padding:10px 14px;
+    font-size:13px; color:rgba(255,255,255,0.75);
+    display:flex; justify-content:space-between; align-items:flex-start; gap:8px;
+  }
+  .wish-delete{background:none;border:none;color:rgba(255,255,255,0.2);cursor:pointer;font-size:18px;padding:0;line-height:1;flex-shrink:0;transition:color 0.2s}
+  .wish-delete:hover{color:rgba(255,60,111,0.7)}
+  .cta{text-align:center}
+  .cta-text{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:16px;letter-spacing:0.05em}
+  .rsvp-btn {
+    display:inline-block;
+    background:linear-gradient(135deg,#ff3c6f,#f59e0b);
+    border:none; border-radius:100px; padding:16px 48px;
+    font-family:'Unbounded',sans-serif; font-size:13px;
+    font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
+    color:#fff; cursor:pointer;
+    transition:transform 0.2s, opacity 0.2s;
+  }
+  .rsvp-btn:hover{transform:scale(1.05);opacity:0.9}
+  .rsvp-btn:active{transform:scale(0.97)}
+  .confetti-container{position:fixed;inset:0;pointer-events:none;z-index:100}
+  .sparkle{position:absolute;animation:sparkle-fall 2.5s ease-in forwards}
+  @keyframes sparkle-fall {
+    0%{opacity:1;transform:translateY(0) rotate(0deg) scale(1)}
+    100%{opacity:0;transform:translateY(100vh) rotate(720deg) scale(0.2)}
+  }
+  @media(max-width:480px){
+    .card{padding:32px 20px}
+    .details-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-blobs">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="blob b3"></div><div class="blob b4"></div>
+</div>
+<div class="confetti-container" id="confetti"></div>
+
+<div class="page">
+  <div class="card">
+
+    <div class="eyebrow">31 мая · только для своих</div>
+
+    <div class="hero-title">Да, я решил праздновать свой<br>день рождения.<br>Приходи.</div>
+    <div class="hero-sub">Это Димончик. У него день рождения. Он стесняется.</div>
+
+    <div class="divider"></div>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <div class="detail-label">Дата</div>
+        <div class="detail-value">31 мая<br><span style="color:rgba(255,255,255,0.45);font-size:13px">воскресенье</span></div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Время</div>
+        <div class="detail-value"><span class="detail-accent">18:00</span><br><span style="color:rgba(255,255,255,0.45);font-size:13px">и хоть до утра</span></div>
+      </div>
+    </div>
+
+    <div class="map-box">
+      <iframe
+        src="https://www.google.com/maps?q=57.964519,56.152961&z=15&output=embed"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <div class="map-footer">
+        <div class="map-pin">📍</div>
+        <div class="map-address">ул. Космонавта Беляева, 111/1</div>
+      </div>
+    </div>
+
+    <div class="dress-box">
+      <div class="dress-icons">🏊‍♂️🔥</div>
+      <div>
+        <div class="dress-title">Дресс-код</div>
+        <div class="dress-desc">Главное правило — пох, в чем удобно. На территории есть небольшой бассейн и сауна, поэтому не забудь купальник / плавки. Всё остальное — на твой вкус!</div>
+        <div class="dress-tags">
+          <span class="tag">🩱 Купальник / плавки</span>
+          <span class="tag">🛁 Полотенце</span>
+          <span class="tag">✨ Хорошее настроение</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bar-section">
+      <div class="bar-header">
+        <div class="bar-icon">🍹</div>
+        <div>
+          <div class="bar-label">Пожелания по бару</div>
+          <div class="bar-subdesc">Что хочешь увидеть в барной карте? Напиши — учтём!</div>
+        </div>
+      </div>
+      <textarea class="bar-textarea" id="bar-input" placeholder="Например: «мохито побольше», «что-нибудь без алкоголя», «текила-шоты обязательно»..."></textarea>
+      <div class="bar-footer">
+        <button class="bar-send-btn" onclick="addWish()">Отправить пожелание →</button>
+      </div>
+      <div class="bar-wishes-list" id="wishes-list"></div>
+    </div>
+
+    <div class="cta">
+      <div class="cta-text">Нажми, чтобы подтвердить участие</div>
+      <button class="rsvp-btn" id="rsvp-btn" onclick="celebrate()">Я иду! 🎉</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const wishes = [];
+function addWish() {
+  const input = document.getElementById('bar-input');
+  const text = input.value.trim();
+  if (!text) return;
+  wishes.push(text);
+  renderWishes();
+  input.value = '';
+  input.focus();
+}
+function removeWish(i) {
+  wishes.splice(i,1);
+  renderWishes();
+}
+function renderWishes() {
+  const list = document.getElementById('wishes-list');
+  list.innerHTML = '';
+  wishes.forEach((w,i) => {
+    const el = document.createElement('div');
+    el.className = 'wish-item';
+    el.innerHTML = `<span>${esc(w)}</span><button class="wish-delete" onclick="removeWish(${i})">×</button>`;
+    list.appendChild(el);
+  });
+}
+function esc(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function celebrate() {
+  const container = document.getElementById('confetti');
+  const colors = ['#ff3c6f','#f59e0b','#7c3aed','#0ea5e9','#10b981','#fff'];
+  for (let i=0;i<80;i++){
+    setTimeout(()=>{
+      const el = document.createElement('div');
+      el.className = 'sparkle';
+      el.style.left = Math.random()*100+'vw';
+      el.style.top = '-10px';
+      el.style.background = colors[Math.floor(Math.random()*colors.length)];
+      const sz = (6+Math.random()*8)+'px';
+      el.style.width=sz; el.style.height=sz;
+      el.style.borderRadius = Math.random()>0.5?'50%':'2px';
+      el.style.animationDuration = (1.5+Math.random()*2)+'s';
+      container.appendChild(el);
+      setTimeout(()=>el.remove(),3500);
+    },i*30);
+  }
+  const btn = document.getElementById('rsvp-btn');
+  btn.textContent = 'Увидимся 31 мая! 🥳';
+  btn.style.background = 'linear-gradient(135deg,#10b981,#0ea5e9)';
+}
+document.getElementById('bar-input').addEventListener('keydown', e=>{
+  if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)) addWish();
+});
+</script>
+
+</body>
+</html>
