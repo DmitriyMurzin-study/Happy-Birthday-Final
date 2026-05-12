@@ -242,14 +242,33 @@
 
 <script>
 const wishes = [];
-function addWish() {
+async function addWish() {
   const input = document.getElementById('bar-input');
   const text = input.value.trim();
   if (!text) return;
-  wishes.push(text);
-  renderWishes();
-  input.value = '';
-  input.focus();
+  const btn = document.querySelector('.bar-send-btn');
+  btn.textContent = 'Отправляем...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://formspree.io/f/xlgzalle', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ message: text })
+    });
+    if (res.ok) {
+      wishes.push(text);
+      renderWishes();
+      input.value = '';
+      btn.textContent = 'Отправлено ✓';
+      setTimeout(() => { btn.textContent = 'Отправить пожелание →'; btn.disabled = false; }, 2000);
+    } else {
+      btn.textContent = 'Ошибка, попробуй ещё раз';
+      setTimeout(() => { btn.textContent = 'Отправить пожелание →'; btn.disabled = false; }, 2500);
+    }
+  } catch(e) {
+    btn.textContent = 'Нет связи :(';
+    setTimeout(() => { btn.textContent = 'Отправить пожелание →'; btn.disabled = false; }, 2500);
+  }
 }
 function removeWish(i) {
   wishes.splice(i,1);
